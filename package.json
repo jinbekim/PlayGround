@@ -1,0 +1,23 @@
+{
+  "name": "session",
+  "version": "1.0.0",
+  "description": "session과 passport 공부",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jinbekim/session.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jinbekim/session/issues"
+  },
+  "homepage": "https://github.com/jinbekim/session#readme",
+  "dependencies": {
+    "dotenv": "^16.0.1"
+  }
+}
