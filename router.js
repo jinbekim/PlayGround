@@ -6,7 +6,6 @@ const router = require('express').Router();
  */
 router.get('*', (req, res) => {
   req.session.views = req.session.views ?? {};
-  console.log(req.session)
   req.session.views.count = (req.session.views.count ?? 0) + 1;
   res.send(req.session)
 });

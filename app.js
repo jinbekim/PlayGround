@@ -5,9 +5,6 @@
  * https://www.npmjs.com/package/dotenv
  */
 require('dotenv').config({path: '.env'});
-const bodyParser = require('body-parser');
-const helmet= require('helmet');
-const compression = require('compression');
 
 /**
  * The Express philosophy is to provide small,
@@ -22,16 +19,33 @@ const app = express();
 /**
  * use static file folders, helmet, body-parser and compression
  */
+const bodyParser = require('body-parser');
+const helmet= require('helmet');
+const compression = require('compression');
 app.use(express.static('public'));
 app.use(helmet());
 app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
+/**
+ * apply express-session
+ */
 app.use(session({
   secret: 'something should not be exposed',
   resave: false,
   saveUninitialized: true,
+}));
+
+/**
+ * apply passport & local strategy
+ */
+const passport = require('passport');
+const localStrategy = require('passport-local').Strategy;
+app.post('/auth/login/process',
+passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/auth/login'
 }));
 
 /**
