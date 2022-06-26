@@ -5,7 +5,10 @@ const router = require('express').Router();
  * __dirname is the directory where your files live.
  */
 router.get('*', (req, res) => {
-  res.sendFile('./public/index.html', {root: __dirname})
+  req.session.views = req.session.views ?? {};
+  console.log(req.session)
+  req.session.views.count = (req.session.views.count ?? 0) + 1;
+  res.send(req.session)
 });
 
 module.exports = router;

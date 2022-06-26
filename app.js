@@ -6,6 +6,7 @@
  */
 require('dotenv').config({path: '.env'});
 
+const { application } = require('express');
 /**
  * The Express philosophy is to provide small,
  * robust tooling for HTTP servers, making
@@ -13,7 +14,14 @@ require('dotenv').config({path: '.env'});
  *  websites, hybrids, or public HTTP APIs.
  */
 const express = require('express');
+const session = require('express-session');
 const app = express();
+
+app.use(session({
+  secret: 'something should not be exposed',
+  resave: false,
+  saveUninitialized: true,
+}));
 
 const router = require('./router');
 app.use(router);
