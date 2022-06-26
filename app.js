@@ -5,8 +5,10 @@
  * https://www.npmjs.com/package/dotenv
  */
 require('dotenv').config({path: '.env'});
+const bodyParser = require('body-parser');
+const helmet= require('helmet');
+const compression = require('compression');
 
-const { application } = require('express');
 /**
  * The Express philosophy is to provide small,
  * robust tooling for HTTP servers, making
@@ -17,12 +19,24 @@ const express = require('express');
 const session = require('express-session');
 const app = express();
 
+/**
+ * use static file folders, helmet, body-parser and compression
+ */
+app.use(express.static('public'));
+app.use(helmet());
+app.use(compression());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+
 app.use(session({
   secret: 'something should not be exposed',
   resave: false,
   saveUninitialized: true,
 }));
 
+/**
+ * router.js
+ */
 const router = require('./router');
 app.use(router);
 
